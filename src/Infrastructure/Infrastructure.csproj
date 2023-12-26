@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Configuration\" />
+    <Folder Include="Data Access\Migrations\" />
+    <Folder Include="Data Access\Repositories\" />
+    <Folder Include="External Services\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="LoggingAndMonitoring\" />
+  </ItemGroup>
+
 </Project>
