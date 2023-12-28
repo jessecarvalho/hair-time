@@ -1,4 +1,4 @@
-namespace Infrastructure.Persistence.Models;
+namespace Infrastructure.Domain.Entities;
 
 public record ServiceCategory
 {

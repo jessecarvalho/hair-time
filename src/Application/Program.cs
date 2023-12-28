@@ -1,3 +1,7 @@
+using Infrastructure.Data;
+using Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var configuration = new ConfigurationBuilder()
@@ -8,6 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IConfiguration>(configuration);
 builder.Services.AddControllers();
+builder.Services.AddDbContext<HairTimeDbContext>(options =>
+    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
