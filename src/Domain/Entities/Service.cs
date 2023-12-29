@@ -12,4 +12,5 @@ public record Service
     public DateTime CreatedAt { get; init; }
     public DateTime UpdatedAt { get; init; }
     public int Status { get; init; }
+    public ICollection<Appointment> Appointments { get; set; }
 };

@@ -18,4 +18,8 @@ public record BarberShop
     public int Status { get; init; }
     public DateTime CreatedAt { get; init; }
     public DateTime UpdatedAt { get; init; }
+    public ICollection<Appointment> Appointments { get; set; }
+    public ICollection<Service> Services { get; set; }
+    public ICollection<ServiceCategory> ServiceCategories { get; set; }
+    public ICollection<Review> Reviews { get; set; }
 }

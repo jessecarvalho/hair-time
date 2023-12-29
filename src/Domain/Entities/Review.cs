@@ -5,7 +5,7 @@ public record Review
     public int Id { get; init; }
     public int BarberShopId { get; init; }
     public BarberShop BarberShop { get; init; }
-    public int ClientId { get; init; }
+    public int CustomerId { get; init; }
     public Customer Customer { get; init; }
     public int Rating { get; init; }
     public int CleanlinessRating { get; init; }

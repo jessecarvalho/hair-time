@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(HairTimeDbContext))]
-    [Migration("20231228230405_initialMigration")]
+    [Migration("20231229221321_initialMigration")]
     partial class initialMigration
     {
         /// <inheritdoc />
@@ -34,9 +34,6 @@ namespace Infrastructure.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BarberShopId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ClientId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -186,9 +183,6 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int>("CleanlinessRating")
                         .HasColumnType("int");
 
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CostRating")
                         .HasColumnType("int");
 
@@ -298,21 +292,21 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Infrastructure.Domain.Entities.Appointment", b =>
                 {
                     b.HasOne("Infrastructure.Domain.Entities.BarberShop", "BarberShop")
-                        .WithMany()
+                        .WithMany("Appointments")
                         .HasForeignKey("BarberShopId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Infrastructure.Domain.Entities.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("Appointments")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Infrastructure.Domain.Entities.Service", "Service")
-                        .WithMany()
+                        .WithMany("Appointments")
                         .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("BarberShop");
@@ -336,15 +330,15 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Infrastructure.Domain.Entities.Review", b =>
                 {
                     b.HasOne("Infrastructure.Domain.Entities.BarberShop", "BarberShop")
-                        .WithMany()
+                        .WithMany("Reviews")
                         .HasForeignKey("BarberShopId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Infrastructure.Domain.Entities.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("Reviews")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("BarberShop");
@@ -355,7 +349,7 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Infrastructure.Domain.Entities.Service", b =>
                 {
                     b.HasOne("Infrastructure.Domain.Entities.BarberShop", "BarberShop")
-                        .WithMany()
+                        .WithMany("Services")
                         .HasForeignKey("BarberShopId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -366,12 +360,35 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Infrastructure.Domain.Entities.ServiceCategory", b =>
                 {
                     b.HasOne("Infrastructure.Domain.Entities.BarberShop", "BarberShop")
-                        .WithMany()
+                        .WithMany("ServiceCategories")
                         .HasForeignKey("BarberShopId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("BarberShop");
+                });
+
+            modelBuilder.Entity("Infrastructure.Domain.Entities.BarberShop", b =>
+                {
+                    b.Navigation("Appointments");
+
+                    b.Navigation("Reviews");
+
+                    b.Navigation("ServiceCategories");
+
+                    b.Navigation("Services");
+                });
+
+            modelBuilder.Entity("Infrastructure.Domain.Entities.Customer", b =>
+                {
+                    b.Navigation("Appointments");
+
+                    b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("Infrastructure.Domain.Entities.Service", b =>
+                {
+                    b.Navigation("Appointments");
                 });
 #pragma warning restore 612, 618
         }

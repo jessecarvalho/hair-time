@@ -5,7 +5,7 @@ public record Appointment
     public int Id { get; init; }
     public int BarberShopId { get; init; }
     public BarberShop BarberShop { get; init; }
-    public int ClientId { get; init; }
+    public int CustomerId { get; init; }
     public Customer Customer { get; init; }
     public int ServiceId { get; init; }
     public Service Service { get; init; }

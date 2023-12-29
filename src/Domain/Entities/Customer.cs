@@ -9,4 +9,6 @@ public record Customer
     public string Email { get; init; }
     public string Password { get; init; }
     public string Telephone { get; init; }
+    public ICollection<Appointment> Appointments { get; set; }
+    public ICollection<Review> Reviews { get; set; }
 }
