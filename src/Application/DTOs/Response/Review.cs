@@ -1,6 +1,6 @@
-namespace Application.DTOs.Response;
+namespace Application.DTOs;
 
-public class ReviewResponseDTO
+public record ReviewResponseDTO
 {
     public int Id { get; set; }
     public int BarberShopId { get; set; }

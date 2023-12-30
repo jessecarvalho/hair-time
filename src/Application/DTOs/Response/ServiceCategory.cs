@@ -1,6 +1,6 @@
-namespace Application.DTOs.Response;
+namespace Application.DTOs;
 
-public record ServiceCategory
+public record ServiceCategoryResponseDTO
 {
     public int Id { get; init; }
     public int BarberShopId { get; init; }

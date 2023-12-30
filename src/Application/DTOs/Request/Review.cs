@@ -1,6 +1,6 @@
-namespace Infrastructure.Persistence.DTOs;
+namespace Application.DTOs;
 
-public record ReviewDTO
+public record ReviewRequestDTO
 {
     public int Id { get; set; }
     public int BarberShopId { get; set; }

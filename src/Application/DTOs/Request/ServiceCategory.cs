@@ -1,4 +1,4 @@
-namespace Infrastructure.Persistence.DTOs;
+namespace Application.DTOs;
 
 public record ServiceCategoryRequestDTO
 {
