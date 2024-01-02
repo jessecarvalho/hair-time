@@ -2,7 +2,6 @@ namespace Application.DTOs;
 
 public record AppointmentRequestDTO
 {
-    public int Id { get; set; }
     public int BarberShopId { get; set; }
     public int ClientId { get; set; }
     public int ServiceId { get; set; }

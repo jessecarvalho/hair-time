@@ -1,7 +1,9 @@
+using System.Text;
 using Application.DTOs;
 using AutoMapper;
 using Infrastructure.Data;
 using Infrastructure.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace Application.Services;
 
@@ -10,11 +12,13 @@ public class BarberShopServices
     
     private readonly IMapper _mapper;
     private readonly HairTimeDbContext _dbContext;
-    
-    public BarberShopServices(IMapper mapper, HairTimeDbContext dbContext)
+    private readonly TokenService _tokenService;
+
+    public BarberShopServices(IMapper mapper, HairTimeDbContext dbContext, TokenService tokenService)
     {
         _mapper = mapper;
         _dbContext = dbContext;
+        _tokenService = tokenService;
     }
     
     public List<BarberShopResponseDTO> GetBarberShops()
@@ -25,14 +29,17 @@ public class BarberShopServices
     public BarberShopResponseDTO getBarberShopById(int id)
     {
         var barberShop = _dbContext.BarberShops.FirstOrDefault(x => x.Id == id);
+        
         return _mapper.Map<BarberShopResponseDTO>(barberShop);
     }
     
-    public BarberShopResponseDTO createBarberShop(BarberShopRequestDTO barberShop)
+    public BarberShopResponseDTO CreateBarberShop(BarberShopRequestDTO barberShop)
     {
+        
         var newBarberShop = _mapper.Map<BarberShop>(barberShop);
         _dbContext.BarberShops.Add(newBarberShop);
         _dbContext.SaveChanges();
+
         return _mapper.Map<BarberShopResponseDTO>(newBarberShop);
     }
     
@@ -50,5 +57,21 @@ public class BarberShopServices
         _dbContext.BarberShops.Remove(barberShop);
         _dbContext.SaveChanges();
     }
-    
+
+    public string Authenticate(AuthenticateRequest barberShop)
+    {
+        if (string.IsNullOrEmpty(barberShop.Username) || string.IsNullOrEmpty(barberShop.Password))
+        {
+            return null;
+        }
+
+        var barberShopEntity = _dbContext.BarberShops.FirstOrDefault(x => x.Email == barberShop.Username && x.Password == barberShop.Password);
+        if (barberShopEntity == null)
+        {
+            return null;
+        }
+
+        return _tokenService.GenerateBarberShopToken(barberShopEntity);
+    }
+
 }

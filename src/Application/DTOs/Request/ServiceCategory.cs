@@ -2,7 +2,6 @@ namespace Application.DTOs;
 
 public record ServiceCategoryRequestDTO
 {
-    public int Id { get; set; }
     public int BarberShopId { get; set; }
     public string Name { get; set; }
     public string Icon { get; set; }

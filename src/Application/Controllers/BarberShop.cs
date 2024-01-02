@@ -4,6 +4,7 @@ using System.Linq;
 using Application.DTOs;
 using Application.Services;
 using Infrastructure.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Application.Controllers;
 
@@ -18,6 +19,7 @@ public class BarberShopController : ControllerBase
         BarberShopServices = barberShopServices;
     }
     
+    [Authorize]
     [HttpGet("api/barber-shopper")]
     public ActionResult<BarberShop> Get()
     {
@@ -39,17 +41,13 @@ public class BarberShopController : ControllerBase
     [HttpPost("api/barber-shopper")]
     public ActionResult<BarberShop> Create(BarberShopRequestDTO barberShop)
     {
-        var createdBarberShop = BarberShopServices.createBarberShop(barberShop);
+        var createdBarberShop = BarberShopServices.CreateBarberShop(barberShop);
         return CreatedAtAction(nameof(GetById), new { id = createdBarberShop.Id }, createdBarberShop);
     }
     
     [HttpPut("api/barber-shopper/{id}")]
     public ActionResult<BarberShop> Update(int id, BarberShopRequestDTO barberShop)
     {
-        if (id != barberShop.Id)
-        {
-            return BadRequest();
-        }
         var updatedBarberShop = BarberShopServices.updateBarberShop(barberShop);
         return Ok(updatedBarberShop);
     }
@@ -59,6 +57,17 @@ public class BarberShopController : ControllerBase
     {
         BarberShopServices.deleteBarberShop(id);
         return NoContent();
+    }
+    
+    [HttpPost("api/barber-shopper/authenticate")]
+    public ActionResult<BarberShop> Authenticate(AuthenticateRequest model)
+    {
+        var barberShop = BarberShopServices.Authenticate(model);
+        
+        if (barberShop == null)
+            return BadRequest(new { message = "Username or password is incorrect" });
+        
+        return Ok(barberShop);
     }
     
 }

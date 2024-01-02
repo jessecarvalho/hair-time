@@ -4,9 +4,9 @@ using Infrastructure.Domain.Entities;
 
 namespace Application.Profiles;
 
-public class Appointments : Profile
+public class AppointmentProfile : Profile
 {
-    public Appointments()
+    public AppointmentProfile()
     {
         CreateMap<Appointment, AppointmentRequestDTO>();
         CreateMap<Appointment, AppointmentResponseDTO>();

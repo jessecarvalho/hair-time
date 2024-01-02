@@ -6,7 +6,7 @@ public record BarberShopResponseDTO
     public string Name { get; set; }
     public string Address { get; set; }
     public string Logo { get; set; }
-    public string Whatsapp { get; set; }
+    public string Telephone { get; set; }
     public string Facebook { get; set; }
     public string Instagram { get; set; }
     public string Plan { get; set; }

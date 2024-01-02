@@ -1,6 +1,8 @@
+using Domain.Interfaces;
+
 namespace Infrastructure.Domain.Entities;
 
-public record Customer
+public record Customer : IUser
 {
     public int Id { get; init; }
     public int BarberShopId { get; init; }

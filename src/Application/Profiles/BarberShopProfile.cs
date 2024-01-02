@@ -8,5 +8,7 @@ public class BarberShopProfile : Profile
     {
         CreateMap<BarberShop, BarberShopResponseDTO>();
         CreateMap<BarberShop, BarberShopRequestDTO>();
+        CreateMap<BarberShopRequestDTO, BarberShop>();
+        CreateMap<BarberShopResponseDTO, BarberShop>();
     }
 }
