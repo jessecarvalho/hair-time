@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using Application.DTOs;
 using Application.Services;
-using Infrastructure.Domain.Entities;
+using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Application.Controllers;
@@ -31,7 +31,7 @@ public class BarberShopController : ControllerBase
     [HttpGet("api/barber-shopper/{id}")]
     public ActionResult<BarberShop> GetById(int id)
     {
-        var barberShop = BarberShopServices.getBarberShopById(id);
+        var barberShop = BarberShopServices.GetBarberShopById(id);
         if (barberShop == null)
         {
             return NotFound();
@@ -51,7 +51,7 @@ public class BarberShopController : ControllerBase
     [HttpPut("api/barber-shopper/{id}")]
     public ActionResult<BarberShop> Update(int id, BarberShopRequestDTO barberShop)
     {
-        var updatedBarberShop = BarberShopServices.updateBarberShop(barberShop);
+        var updatedBarberShop = BarberShopServices.UpdateBarberShop(barberShop);
         return Ok(updatedBarberShop);
     }
     
@@ -59,7 +59,7 @@ public class BarberShopController : ControllerBase
     [HttpDelete("api/barber-shopper/{id}")]
     public ActionResult Delete(int id)
     {
-        BarberShopServices.deleteBarberShop(id);
+        BarberShopServices.DeleteBarberShop(id);
         return NoContent();
     }
     

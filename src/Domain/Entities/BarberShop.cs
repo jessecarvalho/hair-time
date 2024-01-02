@@ -1,6 +1,6 @@
 using Domain.Interfaces;
 
-namespace Infrastructure.Domain.Entities;
+namespace Domain.Entities;
 
 public record BarberShop : IUser
 {

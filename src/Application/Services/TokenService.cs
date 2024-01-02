@@ -1,7 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Infrastructure.Domain.Entities;
+using Domain.Entities;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Application.Services;
@@ -50,7 +50,7 @@ public class TokenService
                 ValidateIssuer = false,
                 ValidateAudience = false,
                 ClockSkew = TimeSpan.Zero
-            }, out SecurityToken validatedToken);
+            }, out var validatedToken);
         }
         catch
         {

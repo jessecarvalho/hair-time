@@ -1,6 +1,6 @@
 using Application.DTOs;
 using AutoMapper;
-using ServiceCategory = Infrastructure.Domain.Entities.ServiceCategory;
+using Domain.Entities;
 
 namespace Application.Profiles;
 

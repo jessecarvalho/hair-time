@@ -2,7 +2,7 @@ using System.Text;
 using Application.DTOs;
 using AutoMapper;
 using Infrastructure.Data;
-using Infrastructure.Domain.Entities;
+using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace Application.Services;
@@ -26,7 +26,7 @@ public class BarberShopServices
         var barberShops = _dbContext.BarberShops.ToList();
         return _mapper.Map<List<BarberShopResponseDTO>>(barberShops);
     }
-    public BarberShopResponseDTO getBarberShopById(int id)
+    public BarberShopResponseDTO GetBarberShopById(int id)
     {
         var barberShop = _dbContext.BarberShops.FirstOrDefault(x => x.Id == id);
         
@@ -43,7 +43,7 @@ public class BarberShopServices
         return _mapper.Map<BarberShopResponseDTO>(newBarberShop);
     }
     
-    public BarberShopResponseDTO updateBarberShop(BarberShopRequestDTO barberShop)
+    public BarberShopResponseDTO UpdateBarberShop(BarberShopRequestDTO barberShop)
     {
         var updateBarberShop = _mapper.Map<BarberShop>(barberShop);
         _dbContext.BarberShops.Update(updateBarberShop);
@@ -51,7 +51,7 @@ public class BarberShopServices
         return _mapper.Map<BarberShopResponseDTO>(updateBarberShop);
     }
     
-    public void deleteBarberShop(int id)
+    public void DeleteBarberShop(int id)
     {
         var barberShop = _dbContext.BarberShops.FirstOrDefault(x => x.Id == id);
         _dbContext.BarberShops.Remove(barberShop);
@@ -66,10 +66,6 @@ public class BarberShopServices
         }
 
         var barberShopEntity = _dbContext.BarberShops.FirstOrDefault(x => x.Email == barberShop.Username && x.Password == barberShop.Password);
-        if (barberShopEntity == null)
-        {
-            return null;
-        }
 
         return _tokenService.GenerateBarberShopToken(barberShopEntity);
     }

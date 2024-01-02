@@ -3,7 +3,7 @@ using Application.DTOs;
 using Application.Services;
 using AutoMapper;
 using Infrastructure.Data;
-using Infrastructure.Domain.Entities;
+using Domain.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;

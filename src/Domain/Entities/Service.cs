@@ -1,4 +1,4 @@
-namespace Infrastructure.Domain.Entities;
+namespace Domain.Entities;
 
 public record Service
 {

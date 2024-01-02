@@ -1,6 +1,6 @@
 using AutoMapper;
 using Application.DTOs;
-using Infrastructure.Domain.Entities;
+using Domain.Entities;
 
 public class BarberShopProfile : Profile
 {
