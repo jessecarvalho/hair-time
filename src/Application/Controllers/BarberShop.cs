@@ -27,6 +27,7 @@ public class BarberShopController : ControllerBase
         return Ok(barberShops);
     }
     
+    [Authorize]
     [HttpGet("api/barber-shopper/{id}")]
     public ActionResult<BarberShop> GetById(int id)
     {
@@ -38,6 +39,7 @@ public class BarberShopController : ControllerBase
         return Ok(barberShop);
     }
     
+    [Authorize]
     [HttpPost("api/barber-shopper")]
     public ActionResult<BarberShop> Create(BarberShopRequestDTO barberShop)
     {
@@ -45,6 +47,7 @@ public class BarberShopController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = createdBarberShop.Id }, createdBarberShop);
     }
     
+    [Authorize]
     [HttpPut("api/barber-shopper/{id}")]
     public ActionResult<BarberShop> Update(int id, BarberShopRequestDTO barberShop)
     {
@@ -52,6 +55,7 @@ public class BarberShopController : ControllerBase
         return Ok(updatedBarberShop);
     }
     
+    [Authorize]
     [HttpDelete("api/barber-shopper/{id}")]
     public ActionResult Delete(int id)
     {
